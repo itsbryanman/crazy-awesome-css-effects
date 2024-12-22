@@ -3,37 +3,30 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Glitch Flicker Test</title>
-
+  <title>Glitch Flicker Fix</title>
   <style>
-    /* Basic reset and full-screen setup */
+    /* Ensure full-screen dimensions for the overlay */
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      background: #000; /* So the glitches stand out */
-      font-family: sans-serif;
+      overflow: hidden; /* Prevent any accidental scrollbars */
+      background: #000;
     }
 
-    /* The overlay that shows the glitch animations */
+    /* Full-screen glitch overlay */
     .glitch-overlay {
       position: fixed;
-      top: 0; 
+      top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100vw; /* Viewport width */
+      height: 100vh; /* Viewport height */
       z-index: 9999;
-
-      /* We'll animate it in a "flicker" style */
-      background: #000; 
-      animation: glitchFlicker 2.5s forwards;
-      overflow: hidden; /* so if we shift elements around, they don't show outside */
+      background: #000; /* Starts fully black */
+      animation: glitchFlicker 2.5s forwards; /* Smooth fade-out after flickering */
     }
 
-    /*
-      We’ll use pseudo-elements for color offsets:
-      - Each will shift, distort, flicker, then vanish.
-    */
+    /* Pseudo-elements for glitch effects */
     .glitch-overlay::before,
     .glitch-overlay::after {
       content: '';
@@ -42,8 +35,6 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: #000;
-      /* We’ll add color channels so it looks like a glitch offset */
       mix-blend-mode: screen;
     }
 
@@ -57,84 +48,70 @@
       animation: glitchShift2 1.8s infinite;
     }
 
-    /* Main content, which sits behind the glitch overlay */
+    /* Main content styling */
     main {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100%;
-      color: #0f0; 
+      height: 100vh;
       text-align: center;
+      color: #0f0;
+      font-family: sans-serif;
     }
 
-    /* Keyframes that flicker the overlay in and out */
+    /* Keyframes for glitch flicker */
     @keyframes glitchFlicker {
-      0% {
-        opacity: 1;
-      }
-      80% {
-        opacity: 1;
+      0%, 80% {
+        opacity: 1; /* Fully visible during flicker */
       }
       100% {
-        opacity: 0;
-        pointer-events: none; /* Let clicks pass through once invisible */
+        opacity: 0; /* Fades out at the end */
+        pointer-events: none; /* Ensure it's not clickable after fading */
       }
     }
 
-    /* Keyframes for the glitchy shifts on the pseudo-elements */
-    /* They randomly shift horizontally or vertically for that 'broken' vibe */
+    /* Glitch animation for pseudo-elements */
     @keyframes glitchShift1 {
-      0% {
+      0%, 100% {
         transform: translate(0, 0);
       }
-      20% {
-        transform: translate(-5px, 2px);
+      25% {
+        transform: translate(-5px, 5px);
       }
-      40% {
-        transform: translate(5px, -3px);
+      50% {
+        transform: translate(5px, -5px);
       }
-      60% {
-        transform: translate(-3px, 4px);
-      }
-      80% {
-        transform: translate(3px, -2px);
-      }
-      100% {
-        transform: translate(0, 0);
+      75% {
+        transform: translate(-3px, 3px);
       }
     }
 
     @keyframes glitchShift2 {
-      0% {
+      0%, 100% {
         transform: translate(0, 0);
       }
       25% {
-        transform: translate(4px, -2px);
+        transform: translate(4px, -4px);
       }
       50% {
-        transform: translate(-4px, 3px);
+        transform: translate(-4px, 4px);
       }
       75% {
-        transform: translate(2px, -3px);
-      }
-      100% {
-        transform: translate(0, 0);
+        transform: translate(2px, -2px);
       }
     }
   </style>
 </head>
 <body>
-  
-  <!-- This overlay does the glitch animation on page load -->
+
+  <!-- Full-screen glitch overlay -->
   <div class="glitch-overlay"></div>
 
-  <!-- Your real content, revealed after the glitch effect finishes -->
+  <!-- Content revealed after glitch -->
   <main>
-    <div>
-      <h1>Glitch Flicker Demo</h1>
-      <p>Everything’s normal now... or is it?</p>
-    </div>
+    <h1>Glitch Flicker Fixed</h1>
+    <p>Now it's working across the whole screen!</p>
   </main>
-  
+
 </body>
 </html>
