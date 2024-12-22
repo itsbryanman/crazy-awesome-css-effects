@@ -3,30 +3,30 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Glitch Flicker Fix</title>
+  <title>Glitch Flicker Debug</title>
   <style>
-    /* Ensure full-screen dimensions for the overlay */
+    /* Ensure full viewport coverage */
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden; /* Prevent any accidental scrollbars */
+      overflow: hidden; /* No scrollbars */
       background: #000;
     }
 
-    /* Full-screen glitch overlay */
+    /* Glitch overlay to cover the screen */
     .glitch-overlay {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw; /* Viewport width */
-      height: 100vh; /* Viewport height */
+      width: 100vw;
+      height: 100vh;
       z-index: 9999;
-      background: #000; /* Starts fully black */
-      animation: glitchFlicker 2.5s forwards; /* Smooth fade-out after flickering */
+      background: #000;
+      animation: glitchFlicker 2.5s forwards;
     }
 
-    /* Pseudo-elements for glitch effects */
+    /* Glitchy pseudo-elements */
     .glitch-overlay::before,
     .glitch-overlay::after {
       content: '';
@@ -54,23 +54,22 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      text-align: center;
       color: #0f0;
+      text-align: center;
       font-family: sans-serif;
     }
 
-    /* Keyframes for glitch flicker */
+    /* Glitch animation keyframes */
     @keyframes glitchFlicker {
       0%, 80% {
-        opacity: 1; /* Fully visible during flicker */
+        opacity: 1;
       }
       100% {
-        opacity: 0; /* Fades out at the end */
-        pointer-events: none; /* Ensure it's not clickable after fading */
+        opacity: 0;
+        pointer-events: none; /* Allow content interaction after fade-out */
       }
     }
 
-    /* Glitch animation for pseudo-elements */
     @keyframes glitchShift1 {
       0%, 100% {
         transform: translate(0, 0);
@@ -107,10 +106,10 @@
   <!-- Full-screen glitch overlay -->
   <div class="glitch-overlay"></div>
 
-  <!-- Content revealed after glitch -->
+  <!-- Main content revealed after glitch -->
   <main>
-    <h1>Glitch Flicker Fixed</h1>
-    <p>Now it's working across the whole screen!</p>
+    <h1>Glitch Flicker Debug</h1>
+    <p>Content should reveal smoothly after the effect.</p>
   </main>
 
 </body>
